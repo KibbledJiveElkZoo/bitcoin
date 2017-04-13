@@ -20,6 +20,7 @@ QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
     unitlist.append(BTC);
     unitlist.append(mBTC);
     unitlist.append(uBTC);
+    unitlist.append(satoshi);
     return unitlist;
 }
 
@@ -30,6 +31,7 @@ bool BitcoinUnits::valid(int unit)
     case BTC:
     case mBTC:
     case uBTC:
+    case satoshi:
         return true;
     default:
         return false;
@@ -43,6 +45,7 @@ QString BitcoinUnits::name(int unit)
     case BTC: return QString("BTC");
     case mBTC: return QString("mBTC");
     case uBTC: return QString::fromUtf8("μBTC");
+    case satoshi: return QString("satoshi(s)");
     default: return QString("???");
     }
 }
@@ -54,6 +57,7 @@ QString BitcoinUnits::description(int unit)
     case BTC: return QString("Bitcoins");
     case mBTC: return QString("Milli-Bitcoins (1 / 1" THIN_SP_UTF8 "000)");
     case uBTC: return QString("Micro-Bitcoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case satoshi: return QString("Satoshis (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000" THIN_SP_UTF8 "00)");
     default: return QString("???");
     }
 }
@@ -65,6 +69,7 @@ qint64 BitcoinUnits::factor(int unit)
     case BTC:  return 100000000;
     case mBTC: return 100000;
     case uBTC: return 100;
+    case satoshi: return 1;
     default:   return 100000000;
     }
 }
@@ -76,6 +81,7 @@ int BitcoinUnits::decimals(int unit)
     case BTC: return 8;
     case mBTC: return 5;
     case uBTC: return 2;
+    case satoshi: return 0;
     default: return 0;
     }
 }
